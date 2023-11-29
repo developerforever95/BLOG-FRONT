@@ -2,14 +2,37 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (event) => {
     event.preventDefault();
-    navigate("/login");
+
+    const username = event.target.username.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: username, email, password }),
+      });
+
+      if (response.ok) {
+        // Registro exitoso, redirigir al login o manejar según corresponda
+        navigate('/login');
+      } else {
+        // Manejar errores, por ejemplo, mostrar un mensaje de error
+        console.error('Error en el registro:', await response.json());
+      }
+      } catch (error) {
+        // Manejar el error de la solicitud
+        console.error('Error de conexión:', error);
+      }
+
+  
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -27,9 +50,7 @@ export const RegisterPage = () => {
             </label>
             <input
               type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              id="username"              
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
             />
@@ -43,9 +64,7 @@ export const RegisterPage = () => {
             </label>
             <input
               type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="email"              
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
             />
@@ -59,9 +78,7 @@ export const RegisterPage = () => {
             </label>
             <input
               type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              id="password"              
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
             />

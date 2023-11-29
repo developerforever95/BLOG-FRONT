@@ -28,7 +28,7 @@ export const LoginForm = () => {
             <h2 className="text-2xl font-bold mb-4 text-center">Iniciar Sesión</h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Usuario</label>
                     <input type="text" id="email" name="email" required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"/>
                 </div>
                 <div>
