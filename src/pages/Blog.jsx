@@ -1,14 +1,26 @@
+import React, { useState, useEffect } from "react";
 import { BlogCard } from "../components/BlogCard.jsx";
 
 export const Blog = () => {
-  const blogs = [
-    { id: 1, title: "Blog 1", imageUrl: "/imgs/2.png" },
-    { id: 2, title: "Blog 2", imageUrl: "/imgs/5.png" },
-    { id: 3, title: "Blog 3", imageUrl: "/imgs/11.png" },
-    { id: 4, title: "Blog 4", imageUrl: "/imgs/15.png" },
-    { id: 5, title: "Blog 5", imageUrl: "/imgs/19.png" },
-    { id: 6, title: "Blog 6", imageUrl: "/imgs/2.png" }
-  ];
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/blogs');
+        if (!response.ok) {
+          throw new Error('Error al cargar los blogs');
+        }
+        const blogs = await response.json();
+        console.log(blogs);
+        setBlogs(blogs);
+      } catch (error) {
+        console.error("Error al cargar los blogs:", error);
+      }
+    };
+
+    fetchBlogs();
+  }, []); 
 
   return (
     <div className="container mx-auto p-4 m-10 ">

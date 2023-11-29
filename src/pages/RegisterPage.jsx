@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
   const navigate = useNavigate();
+  const [confirmationMessage, setConfirmationMessage] = useState("");
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -12,28 +13,25 @@ export const RegisterPage = () => {
     const password = event.target.password.value;
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/register', {
-        method: 'POST',
+      const response = await fetch("http://127.0.0.1:8000/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ name: username, email, password }),
       });
 
       if (response.ok) {
-        // Registro exitoso, redirigir al login o manejar según corresponda
-        navigate('/login');
+        setConfirmationMessage("Registro exitoso. Por favor, inicia sesión.");
+        setTimeout(() => navigate("/login"), 1500);
       } else {
-        // Manejar errores, por ejemplo, mostrar un mensaje de error
-        console.error('Error en el registro:', await response.json());
+        console.error("Error en el registro:", await response.json());
       }
-      } catch (error) {
-        // Manejar el error de la solicitud
-        console.error('Error de conexión:', error);
-      }
-
-  
+    } catch (error) {
+      console.error("Error de conexión:", error);
+    }
   };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="container mx-auto p-4 max-w-md ">
@@ -50,7 +48,7 @@ export const RegisterPage = () => {
             </label>
             <input
               type="text"
-              id="username"              
+              id="username"
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
             />
@@ -64,7 +62,7 @@ export const RegisterPage = () => {
             </label>
             <input
               type="email"
-              id="email"              
+              id="email"
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
             />
@@ -78,7 +76,7 @@ export const RegisterPage = () => {
             </label>
             <input
               type="password"
-              id="password"              
+              id="password"
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
             />
@@ -98,6 +96,16 @@ export const RegisterPage = () => {
             </Link>
           </p>
         </div>
+
+        {confirmationMessage && (
+          <div
+            className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mt-4 rounded relative"
+            role="alert"
+          >
+            <strong className="font-bold">¡Hecho! </strong>
+            <span className="block sm:inline">{confirmationMessage}</span>
+          </div>
+        )}
       </div>
     </div>
   );

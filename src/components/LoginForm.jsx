@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx'; 
 import * as authService from '../auth/authService.js'; 
@@ -7,6 +7,7 @@ import * as authService from '../auth/authService.js';
 export const LoginForm = () => {
 
     const navigate = useNavigate();
+    const [confirmationMessage, setConfirmationMessage] = useState("");
     const { login } = useAuth();
 
     const handleSubmit = async (event) => {
@@ -19,7 +20,7 @@ export const LoginForm = () => {
         login(token);
         navigate('/');
       } catch (error) {
-        alert(error); 
+        setConfirmationMessage("Credenciales incorrectas, vuelva a intentarlo.");
       }
     };
 
@@ -40,6 +41,15 @@ export const LoginForm = () => {
             <div className="text-center mt-4">
                 <p>No tienes una cuenta? <Link to="/register" className="text-blue-500 hover:text-blue-600">Regístrate</Link></p>
             </div>
+            {confirmationMessage && (
+            <div
+                className="bg-green-100 border border-red-400 text-red-700 px-4 py-3 mt-4 rounded relative"
+                role="alert"
+            >
+                <strong className="font-bold">¡ERROR:! </strong>
+                <span className="block sm:inline">{confirmationMessage}</span>
+            </div>
+            )}
         </div>
     );
 };
