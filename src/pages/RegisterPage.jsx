@@ -83,7 +83,7 @@ export const RegisterPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            className="w-full px-4 py-2 bg-tahiti-500 text-white rounded-md hover:bg-tahiti-600"
           >
             Registrarse
           </button>
@@ -91,7 +91,7 @@ export const RegisterPage = () => {
         <div className="text-center mt-4">
           <p>
             Iniciar Sesion{" "}
-            <Link to="/login" className="text-blue-500 hover:text-blue-600">
+            <Link to="/login" className="text-tahiti-500 hover:text-blue-600">
               Login
             </Link>
           </p>

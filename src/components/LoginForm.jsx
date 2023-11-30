@@ -15,6 +15,8 @@ export const LoginForm = () => {
       const username = event.target.email.value;
       const password = event.target.password.value;
   
+      setConfirmationMessage("Iniciando sesión...");
+      
       try {
         const token = await authService.login(username, password);
         login(token);
@@ -36,10 +38,10 @@ export const LoginForm = () => {
                     <label htmlFor="password" className="block text-sm font-medium text-gray-700">Contraseña</label>
                     <input type="password" id="password" name="password" required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"/>
                 </div>
-                <button type="submit" className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Iniciar Sesión</button>
+                <button type="submit" className="w-full px-4 py-2 bg-tahiti-500 text-white rounded-md hover:bg-tahiti-600">Iniciar Sesión</button>
             </form>
             <div className="text-center mt-4">
-                <p>No tienes una cuenta? <Link to="/register" className="text-blue-500 hover:text-blue-600">Regístrate</Link></p>
+                <p>No tienes una cuenta? <Link to="/register" className="text-tahiti-500 hover:text-blue-600">Regístrate</Link></p>
             </div>
             {confirmationMessage && (
             <div

@@ -12,11 +12,12 @@ export const Navbar = ({ username, userImageUrl }) => {
     };
 
     return (
-        <nav className="flex items-center justify-between p-4 bg-gray-800 text-white">
+        <nav className="flex items-center justify-between p-4 bg-tahiti-600 text-white">
             <div className="text-xl font-bold">Blog</div>
             <ul className="hidden md:flex space-x-4">
                 <li><Link to="/" className="hover:text-gray-300">Home</Link></li>
-                <li><Link to="/blogs" className="hover:text-gray-300">Publicar blogs</Link></li>
+                <li><Link to="/blog-manager" className="hover:text-gray-300">Blog Manager</Link></li>
+                <li><Link to="/blogs" className="hover:text-gray-300">Publicar blogs</Link></li>       
                 <li><button onClick={handleLogout} className="hover:text-gray-300">Logout</button></li>
             </ul>
             <div className="flex items-center space-x-2">

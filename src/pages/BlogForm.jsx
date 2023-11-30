@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import * as authService from '../auth/authService.js';
 
 export const BlogForm = () => {
   
@@ -9,12 +10,18 @@ export const BlogForm = () => {
   const handleCreateBlog = async (event) => {
     event.preventDefault();
 
+    const user = authService.getUser();
+    if (!user) {
+      alert("No se ha detectado un usuario logueado.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append('title', event.target.blogTitle.value);
     formData.append('description', event.target.blogDescription.value);
     formData.append('link', event.target.blogLink.value);
     formData.append('category', event.target.blogCategory.value);
-    formData.append('user_id', 1);  
+    formData.append('user_id', user.id);  
     formData.append('image', event.target.blogImage.files[0]);  
 
     try {
@@ -53,7 +60,12 @@ export const BlogForm = () => {
             type="file"
             id="blogImage"
             name="blogImage"
-            className="mt-1 block w-full"
+            className="mt-1 block w-full text-sm text-slate-500
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-full file:border-0
+            file:text-sm file:font-semibold
+            file:bg-tahiti-50 file:text-tahiti-700
+            hover:file:bg-tahiti-100"
           />
         </div>
         <div>
@@ -119,7 +131,7 @@ export const BlogForm = () => {
         </div>
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          className="px-4 py-2 bg-tahiti-500 text-white rounded-md hover:bg-tahiti-600"
         >
           Publicar Blog
         </button>

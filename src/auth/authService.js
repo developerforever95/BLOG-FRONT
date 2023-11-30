@@ -9,6 +9,7 @@ const login = async (username, password) => {
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ username, password }),
     });
 
     if (!response.ok) {
@@ -16,19 +17,32 @@ const login = async (username, password) => {
       throw new Error('Credenciales incorrectas');
     }
 
-    const data = await response.json();
+    const data = await response.json(); 
     localStorage.setItem('token', data.token);
-    return data.token;
+    localStorage.setItem('user', JSON.stringify(data.user)); 
+
+    return data;
+
+
 
   } catch (error) {
     throw error;
   }
 };
 
-
-
 const logout = () => {
   localStorage.removeItem('token');
+  localStorage.removeItem('user'); 
 };
 
-export { login, logout };
+const getUser = () => {
+  const user = localStorage.getItem('user');
+  return user ? JSON.parse(user) : null;
+};
+
+const getToken = () => {
+  return localStorage.getItem('token');
+};
+
+export { login, logout, getUser, getToken };
+
