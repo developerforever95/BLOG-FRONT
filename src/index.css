@@ -5,3 +5,11 @@
 body{
     background-color: rgb(225, 225, 225);
 }
+
+.botonBlogManager:hover{
+    color: aliceblue;
+}
+
+.tituloBlogManager{
+    color: aliceblue;
+}

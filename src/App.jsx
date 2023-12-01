@@ -10,6 +10,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute.jsx";
 import { RegisterPage } from "./pages/RegisterPage.jsx";
 import { BlogDetails } from "./pages/BlogDetails.jsx";
 import { BlogManager } from "./pages/BlogManager.jsx";
+import { BlogEdit } from "./pages/BlogEdit.jsx";
 import * as authService from './auth/authService.js';
 
 const Main = () => {
@@ -34,6 +35,7 @@ const Main = () => {
         <Route path="/blogs" element={<ProtectedRoute><BlogForm /></ProtectedRoute>} />
         <Route path="/blogs/:blogId" element={<ProtectedRoute><BlogDetails /></ProtectedRoute>} />
         <Route path="/blog-manager" element={<ProtectedRoute><BlogManager /></ProtectedRoute>} />
+        <Route path="/blogedit/:blogId" element={<ProtectedRoute><BlogEdit /></ProtectedRoute>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
